@@ -5,6 +5,7 @@ import { BsInfoCircle } from 'react-icons/bs'
 import Loader from './Loader'
 import { useContext } from 'react'
 import { TransactionContext } from '../context/TransactionContext'
+import { shortenAddress } from '../utils/shortenAddress'
 
 const Input = ({ placeholder, name, type, value, handleChange }) => (
   <input
@@ -19,6 +20,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 
 const Welcome = () => {
   const {
+    isLoading,
     connectWallet,
     currentAccount,
     formData,
@@ -80,7 +82,9 @@ const Welcome = () => {
               </div>
               <div>
                 <p className="text-white font-light text-sm">
-                  0x12312323123221334235
+                  {!currentAccount
+                    ? 'Connect your account'
+                    : shortenAddress(currentAccount)}
                 </p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
@@ -117,7 +121,7 @@ const Welcome = () => {
 
             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-            {false ? (
+            {isLoading ? (
               <Loader />
             ) : (
               <button
