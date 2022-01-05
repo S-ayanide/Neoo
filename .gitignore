@@ -3,6 +3,7 @@
 **coverage
 **coverage.json
 **typechain
+**dist
 
 #Hardhat files
 **cache
