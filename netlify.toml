@@ -1,3 +1,8 @@
+[build]
+  base = "client"
+  command = "npm run build"
+  publish = "client/dist"
+
 [[headers]]
   for = "/*.js"
   [headers.values]
