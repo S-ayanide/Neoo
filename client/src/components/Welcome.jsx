@@ -23,6 +23,7 @@ const Welcome = () => {
     isLoading,
     connectWallet,
     currentAccount,
+    isConnecting,
     formData,
     sendTransaction,
     handleChange,
@@ -34,7 +35,9 @@ const Welcome = () => {
     const { addressTo, amount, keyword, message } = formData
 
     e.preventDefault()
-    if (!addressTo || !amount || !keyword || !message) return
+    if (!currentAccount) return alert('Please connect your wallet first.')
+    if (!addressTo || !amount || !keyword || !message)
+      return alert('Please fill in all fields before sending.')
 
     sendTransaction()
   }
@@ -54,10 +57,13 @@ const Welcome = () => {
             <button
               type="button"
               onClick={connectWallet}
-              className="flex flex-row justify-center items-center my-5 bg-[#b8c6db] p-3 rounded-full cursor-pointer hover:bg-[#c5cfdf]"
+              disabled={isConnecting}
+              className="flex flex-row justify-center items-center my-5 bg-[#b8c6db] p-3 rounded-full cursor-pointer hover:bg-[#c5cfdf] disabled:opacity-60 disabled:cursor-not-allowed"
             >
               <AiFillPlayCircle className="text-white mr-2" />
-              <p className="text-base font-semibold">Connect Wallet</p>
+              <p className="text-base font-semibold">
+                {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+              </p>
             </button>
           )}
 
